@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import de.greenrobot.event.EventBus;
+
 public class My2Service extends Service {
     public static final String TAG = "My2Service ";
     public My2Service() {
@@ -12,43 +14,57 @@ public class My2Service extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d(TAG, "onBind()");
+        String msg = "onBind()";
+        EventBus.getDefault().post(TAG + msg);
+        Log.d(TAG, msg);
         return null;
     }
 
     @Override
     public void onCreate() {
-        Log.d(TAG, "onCreate()");
+        String msg = "onCreate()";
+        EventBus.getDefault().post(TAG + msg);
+        Log.d(TAG, msg);
         super.onCreate();
     }
 
     @Override
     public void onRebind(Intent intent) {
-        Log.d(TAG, "onRebind()");
+        String msg = "onRebind()";
+        EventBus.getDefault().post(TAG + msg);
+        Log.d(TAG, msg);
         super.onRebind(intent);
     }
 
     @Override
     public void onStart(Intent intent, int startId) {
-        Log.d(TAG, "onStart()");
+        String msg = "onStart()";
+        EventBus.getDefault().post(TAG + msg);
+        Log.d(TAG, msg);
         super.onStart(intent, startId);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand()");
+        String msg = "onStartCommand()";
+        EventBus.getDefault().post(TAG + msg);
+        Log.d(TAG, msg);
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
-        Log.d(TAG, "onUnbind()");
+        String msg = "onUnbind()";
+        EventBus.getDefault().post(TAG + msg);
+        Log.d(TAG, msg);
         return super.onUnbind(intent);
     }
 
     @Override
     public void onDestroy() {
-        Log.d(TAG, "onDestroy()");
+        String msg = "onDestroy()";
+        EventBus.getDefault().post(TAG + msg);
+        Log.d(TAG, msg);
         super.onDestroy();
     }
 }

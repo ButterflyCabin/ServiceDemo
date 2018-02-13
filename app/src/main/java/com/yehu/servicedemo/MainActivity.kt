@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        val TAG = "MainActivity: "
+        val TAG = "MainActivity：\t"
         var i = 0;
     }
 

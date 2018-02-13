@@ -8,7 +8,7 @@ import android.util.Log;
 import de.greenrobot.event.EventBus;
 
 public class My2Service extends Service {
-    public static final String TAG = "My2Service ";
+    public static final String TAG = "My2Service：\t";
     public My2Service() {
     }
 

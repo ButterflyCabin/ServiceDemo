@@ -14,7 +14,7 @@ import android.widget.TextView;
 import de.greenrobot.event.EventBus;
 
 public class Main2Activity extends AppCompatActivity {
-    public static final String TAG = "Main2Activity";
+    public static final String TAG = "Main2Activity：\t";
     private TextView show_log;
 
     @Override

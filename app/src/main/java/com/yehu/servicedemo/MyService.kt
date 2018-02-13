@@ -62,6 +62,6 @@ class MyService : Service() {
     }
 
     companion object {
-        val TAG = "MyService: "
+        val TAG = "MyService：\t"
     }
 }

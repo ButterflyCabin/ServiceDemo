@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.yehu.servicedemo.Event.Front2Event;
+
 import de.greenrobot.event.EventBus;
 
 public class Main2Activity extends AppCompatActivity {
@@ -29,39 +31,37 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public void startService(View view) {
-        String msg = "startService()";
-        Log.i(TAG, msg);
-        showLog(TAG + msg);
+        showLog(TAG, "startService()");
         startService(new Intent(this, My2Service.class));
     }
 
     public void bindService(View v) {
-        String msg = "bindService()";
-        Log.i(TAG, msg);
-        showLog(TAG + msg);
+        showLog(TAG, "bindService()");
         bindService(new Intent(this, My2Service.class), serviceConnent, Context.BIND_AUTO_CREATE);
     }
 
     public void stopService(View v) {
-        String msg = "stopService()";
-        Log.i(TAG, msg);
-        showLog(TAG + msg);
+        showLog(TAG, "stopService()");
         stopService(new Intent(this, My2Service.class));
     }
 
     public void unbindService(View v) {
-        String msg = "unbindService()";
-        Log.i(TAG, msg);
-        showLog(TAG + msg);
-        unbindService(serviceConnent);
+       try{
+           unbindService(serviceConnent);
+           showLog(TAG, "unbindService()");
+       }catch (Exception e){
+           showLog(TAG, "not bindService");
+       }
+
     }
 
     public void startActivity(View v) {
         startActivity(new Intent(this, MainActivity.class));
     }
 
-    void showLog(String msg) {
-        show_log.append(msg + "\n\r");
+    void showLog(String tag, String msg) {
+        show_log.append(tag + msg + "\n\r");
+        Log.i(tag, msg);
     }
 
     public void clearLog(View v) {
@@ -73,22 +73,19 @@ public class Main2Activity extends AppCompatActivity {
     ServiceConnection serviceConnent = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            String msg = "Service connected " + i++;
-            Log.i(TAG, msg);
-            showLog(TAG + msg);
+            showLog(TAG, "Service connected " + i++);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             String msg = "Service Disconnected()";
-            Log.i(TAG, msg);
-            showLog(TAG + msg);
+            showLog(TAG, msg);
         }
     };
 
-    public void onEventMainThread(String msg){
-        if (null != msg){
-            showLog(msg);
+    public void onEventMainThread(Front2Event event) {
+        if (null != event) {
+            showLog(event.tag, event.msg);
         }
     }
 

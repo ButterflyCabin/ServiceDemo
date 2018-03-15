@@ -6,15 +6,15 @@ package com.yehu.servicedemo.Event;
  * @author yehu
  *         类说明：
  */
-public class FrontEvent {
+public class Front2Event {
     public String msg;
     public String tag;
 
-    public FrontEvent() {
+    public Front2Event() {
 
     }
 
-    public FrontEvent(String tag,String msg) {
+    public Front2Event(String tag, String msg) {
         this.msg = msg;
         this.tag = tag;
     }

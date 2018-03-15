@@ -14,54 +14,41 @@ class MyService : Service() {
     }
 
     override fun onBind(intent: Intent): IBinder? {
-        val msg = "onBind()"
-        EventBus.getDefault().post(FrontEvent(TAG + msg))
-        Log.i(MainActivity.TAG, msg)
+        EventBus.getDefault().post(FrontEvent(TAG , "onBind()"))
         return MyBinder()
     }
 
 
     override fun onRebind(intent: Intent) {
-        val msg = "onRebind()"
-        EventBus.getDefault().post(FrontEvent(TAG + msg))
-        Log.i(MainActivity.TAG, msg)
+        EventBus.getDefault().post(FrontEvent(TAG , "onRebind()"))
         super.onRebind(intent)
     }
 
     override fun onCreate() {
-        val msg = "onCreate()"
-        EventBus.getDefault().post(FrontEvent(TAG + msg))
-        Log.i(MainActivity.TAG, msg)
+        EventBus.getDefault().post(FrontEvent(TAG , "onCreate()"))
         super.onCreate()
     }
 
     override fun onStart(intent: Intent, startId: Int) {
-        val msg = "onStart()"
-        EventBus.getDefault().post(FrontEvent(TAG + msg))
-        Log.i(MainActivity.TAG, msg)
+        EventBus.getDefault().post(FrontEvent(TAG , "onStart()"))
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        val msg = "onStartCommand()"
-        EventBus.getDefault().post(FrontEvent(TAG + msg))
-        Log.i(MainActivity.TAG, msg)
+        EventBus.getDefault().post(FrontEvent(TAG , "onStartCommand()"))
         return super.onStartCommand(intent, flags, startId)
     }
 
     override fun onUnbind(intent: Intent): Boolean {
-        val msg = "onUnbind()"
-        EventBus.getDefault().post(FrontEvent(TAG + msg))
-        Log.i(MainActivity.TAG, msg)
+        EventBus.getDefault().post(FrontEvent(TAG , "onUnbind()"))
         return super.onUnbind(intent)
     }
 
     override fun onDestroy() {
-        val msg = "onDestroy()"
-        EventBus.getDefault().post(FrontEvent(TAG + msg))
         super.onDestroy()
+        EventBus.getDefault().post(FrontEvent(TAG , "onDestroy()"))
     }
 
     companion object {
-        val TAG = "MyService：\t"
+        val TAG = "My__Service：\t\t"
     }
 }

@@ -10,9 +10,9 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.EditText
-import android.widget.TextView
 import com.yehu.servicedemo.Event.FrontEvent
 import de.greenrobot.event.EventBus
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     lateinit var show_log: EditText
@@ -26,32 +26,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startService(v: View) {
-        val msg = "startService()"
-        showLog(TAG + msg)
-        Log.i(TAG, msg)
+        showLog(TAG, "startService()")
         startService(Intent(this, MyService::class.java))
 //        startService(Intent(this, MyService.javaClass))// 启动无效
     }
 
     fun bindService(v: View) {
-        val msg = "bindService()"
-        showLog(TAG + msg)
-        Log.i(TAG, msg)
+        showLog(TAG, "bindService()")
         bindService(Intent(this, MyService::class.java), serviceConnent, Context.BIND_AUTO_CREATE)
     }
 
     fun stopService(v: View) {
-        val msg = "stopService()"
-        showLog(TAG + msg)
-        Log.i(TAG, msg)
+        showLog(TAG, "stopService()")
         stopService(Intent(this, MyService::class.java))
     }
 
     fun unbindService(v: View) {
-        val msg = "unbindService()"
-        showLog(TAG + msg)
-        Log.i(TAG, msg)
-        unbindService(serviceConnent)
+        try {
+            unbindService(serviceConnent)
+            showLog(TAG, "unbindService()")
+        }catch (e: Exception){
+            showLog(TAG, "not bindService")
+        }
+
+
     }
 
     fun startActivity(v: View) {
@@ -60,33 +58,31 @@ class MainActivity : AppCompatActivity() {
 
     val serviceConnent = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
-            val msg = "Service connected " + i++
-            showLog(TAG + msg)
-            Log.i(TAG, msg)
+            showLog(TAG, "Service connected " + i++)
         }
 
         override fun onServiceDisconnected(name: ComponentName) {
-            val msg = "Service disconnected"
-            showLog(TAG + msg)
-            Log.i(TAG, msg)
+            showLog(TAG, "Service disconnected")
         }
     }
-    fun clearLog(v:View){
+
+    fun clearLog(v: View) {
         show_log.setText("")
     }
 
-    fun showLog(msg: String) {
-        show_log.append(msg + "\n\r")
+    fun showLog(tag: String, msg: String) {
+        show_log.append(tag + msg + "\n\r")
+        Log.i(tag, msg)
         show_log.setSelection(show_log.text.length)
     }
 
     companion object {
-        val TAG = "MainActivity：\t"
+        val TAG = "MainActivity：\t\t"
         var i = 0;
     }
 
-    fun onEventMainThread(event: FrontEvent){
-        showLog(event?.msg)
+    fun onEventMainThread(event: FrontEvent) {
+        showLog(event?.tag, event?.msg)
     }
 
     override fun onDestroy() {
